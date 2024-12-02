@@ -38,7 +38,7 @@ function App() {
       <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <h1>To Do List</h1>
-        <main style={{ display: "flex" }}>
+        <main className="main-area">
           <section>
             <h2>Add a new task</h2>
             <input
