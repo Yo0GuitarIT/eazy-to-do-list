@@ -34,10 +34,10 @@ function App() {
           <button onClick={handleAddTodoTask}>Add</button>
           <ul>
             {tasks.map((task, index) => (
-              <>
+              <div style={{display:"flex"}}> 
                 <li key={index}>{task}</li>
                 <button onClick={handleDeleteOnClick(index)}>Delete</button>
-              </>
+              </div>
             ))}
           </ul>
         </main>
