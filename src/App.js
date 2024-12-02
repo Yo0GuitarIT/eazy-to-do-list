@@ -10,12 +10,22 @@ function App() {
     if (inputValue.trim() === "") {
       return;
     }
-    setTasks([...tasks, inputValue]);
+    setTasks([...tasks, { text: inputValue, completed: false }]);
     setInputValue("");
   };
 
   const handleDeleteOnClick = (index) => () => {
     const newTasks = tasks.filter((_task, taskIndex) => taskIndex !== index);
+    setTasks(newTasks);
+  };
+
+  const handleToggleComplete = (index) => () => {
+    const newTasks = tasks.map((task, taskIndex) => {
+      if (taskIndex === index) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
     setTasks(newTasks);
   };
 
@@ -34,10 +44,20 @@ function App() {
           <button onClick={handleAddTodoTask}>Add</button>
           <ul>
             {tasks.map((task, index) => (
-              <div style={{display:"flex"}}> 
-                <li key={index}>{task}</li>
+              <li key={index}>
+                <span
+                  style={{
+                    textDecoration: task.completed ? "line-through" : "none",
+                    marginRight: "10px",
+                  }}
+                >
+                  {task.text}
+                </span>
+                <button onClick={handleToggleComplete(index)}>
+                  {task.completed ? "Undo" : "Complete"}
+                </button>
                 <button onClick={handleDeleteOnClick(index)}>Delete</button>
-              </div>
+              </li>
             ))}
           </ul>
         </main>
