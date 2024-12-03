@@ -1,6 +1,9 @@
 import { useState } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import Header from "./Header";
+import AddInputField from "./AddInputField";
+import TaskArea from "./TaskArea";
 
 function App() {
     const [inputValue, setInputValue] = useState("");
@@ -35,41 +38,18 @@ function App() {
 
     return (
         <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <h1>To Do List</h1>
-            </header>
+            <Header logo={logo} />
             <main>
-                <section>
-                    <h2>Add a new task</h2>
-                    <input
-                        type="text"
-                        value={inputValue}
-                        placeholder="Write something to do..."
-                        onChange={handleInputChange}
-                    />
-                    <button onClick={handleAddTodoTask}>Add</button>
-                </section>
-                <section>
-                    <h2>Tasks</h2>
-                    <ul>
-                        {tasks.map((task, index) => (
-                            <li key={index}>
-                                <span
-                                    style={{
-                                        textDecoration: task.completed ? "line-through" : "none",
-                                    }}
-                                >
-                                    {task.text}
-                                </span>
-                                <button onClick={handleToggleComplete(index)}>
-                                    {task.completed ? "Undo" : "Complete"}
-                                </button>
-                                <button onClick={handleDeleteOnClick(index)}>Delete</button>
-                            </li>
-                        ))}
-                    </ul>
-                </section>
+                <AddInputField
+                    inputValue={inputValue}
+                    handleInputChange={handleInputChange}
+                    handleAddTodoTask={handleAddTodoTask}
+                />
+                <TaskArea
+                    tasks={tasks}
+                    handleToggleComplete={handleToggleComplete}
+                    handleDeleteOnClick={handleDeleteOnClick}
+                />
             </main>
         </div>
     );
